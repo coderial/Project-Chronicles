@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 2045172040}
   - component: {fileID: 2045172041}
   - component: {fileID: 2045172045}
+  - component: {fileID: 2045172046}
   m_Layer: 0
   m_Name: Theodore
   m_TagString: Untagged
@@ -517,6 +518,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f6a8fc459a7774a8ea417ba507b8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.PlayerAnimator
+--- !u!114 &2045172046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045172037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd28ded030ec284db40fc3933eefff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerStateMachine
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

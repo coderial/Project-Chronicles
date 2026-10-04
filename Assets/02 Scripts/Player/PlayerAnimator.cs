@@ -9,6 +9,7 @@ namespace Project_Chronicles.Player
         protected readonly int _walkHash = Animator.StringToHash("IsWalk");
         protected readonly int _runHash = Animator.StringToHash("IsRun");
         protected readonly int _jumpHash = Animator.StringToHash("Jump");
+
         protected override void Awake()
         {
             base.Awake();

@@ -4,12 +4,13 @@ using UnityEngine.InputSystem;
 namespace Project_Chronicles.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(SpriteRenderer))]
     public sealed class PlayerHorizontalMovement : MonoBehaviour
     {
         public const float PrototypeWalkSpeed = 6f;
         public const float PrototypeRunInputWindow = 0.2f;
         public const float PrototypeRunSpeed = 12f;
-        
+
         [SerializeField, Min(0f)]
         private float _walkSpeed = PrototypeWalkSpeed;
 
@@ -23,6 +24,7 @@ namespace Project_Chronicles.Player
         private InputAction _moveLeftAction;
         private InputAction _moveRightAction;
         private Rigidbody2D _body;
+        private SpriteRenderer _sprite;
         private float _horizontalInput;
         private float _facingDirection = 1f;
         private float _runDirection;
@@ -42,6 +44,7 @@ namespace Project_Chronicles.Player
         {
             _inputSystem = new PlayerInputSystem();
             _body = GetComponent<Rigidbody2D>();
+            _sprite = GetComponent<SpriteRenderer>();
             _moveLeftAction = _inputSystem.Player.MoveLeft;
             _moveRightAction = _inputSystem.Player.MoveRight;
         }
@@ -49,14 +52,14 @@ namespace Project_Chronicles.Player
         {
             _moveLeftAction.performed += OnMoveLeft;
             _moveRightAction.performed += OnMoveRight;
-            
+
             _moveLeftAction.Enable();
             _moveRightAction.Enable();
         }
 
         private void OnDisable()
         {
-            if(_moveLeftAction != null)
+            if (_moveLeftAction != null)
             {
                 _moveLeftAction.performed -= OnMoveLeft;
                 _moveLeftAction.Disable();
@@ -81,6 +84,7 @@ namespace Project_Chronicles.Player
             if (_horizontalInput != 0)
             {
                 _facingDirection = Mathf.Sign(_horizontalInput);
+                _sprite.flipX = _facingDirection < 0;
             }
         }
 
@@ -139,7 +143,7 @@ namespace Project_Chronicles.Player
         {
             float pressedTime = Time.time;
             float timeSincePreviousPress = pressedTime - lastPressedTime;
-            if(IsSecondTapWithinWindow(timeSincePreviousPress, _runInputWindow))
+            if (IsSecondTapWithinWindow(timeSincePreviousPress, _runInputWindow))
             {
                 _runDirection = Mathf.Sign(direction);
                 _facingDirection = _runDirection;

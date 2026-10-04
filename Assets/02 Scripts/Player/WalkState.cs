@@ -1,6 +1,6 @@
 namespace Project_Chronicles.Player
 {
-    public class IdleState : IState
+    public class WalkState : IState
     {
         private PlayerAnimator _animator;
         public void Initialize(PlayerAnimator animator)
@@ -9,14 +9,13 @@ namespace Project_Chronicles.Player
         }
         public void Enter()
         {
-            _animator.SetMovement(isWalking: false, isRunning: false);
+            _animator.SetMovement(isWalking: true, isRunning: false);
         }
 
         public void Exit()
         {
 
         }
-
         public void Update()
         {
 
