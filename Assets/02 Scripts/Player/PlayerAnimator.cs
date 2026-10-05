@@ -3,16 +3,28 @@ using Project_Chronicles.Common;
 
 namespace Project_Chronicles.Player
 {
-    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(PlayerStateMachine))]
     public class PlayerAnimator : BaseAnimator
     {
         protected readonly int _walkHash = Animator.StringToHash("IsWalk");
         protected readonly int _runHash = Animator.StringToHash("IsRun");
         protected readonly int _jumpHash = Animator.StringToHash("Jump");
 
+        private PlayerStateMachine _stateMachine;
+        private PlayerHorizontalMovement _movement;
+
         protected override void Awake()
         {
             base.Awake();
+            _stateMachine = GetComponent<PlayerStateMachine>();
+            _movement = GetComponent<PlayerHorizontalMovement>();
+        }
+
+        private void LateUpdate()
+        {
+            PlayerState state = _stateMachine.CurrentState;
+            SetMovement(state == PlayerState.WALK, state == PlayerState.RUN);
+            _spriteRenderer.flipX = _movement.FacingDirection < 0f;
         }
 
         public void SetMovement(bool isWalking, bool isRunning)

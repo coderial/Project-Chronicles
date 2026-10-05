@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 2045172041}
   - component: {fileID: 2045172045}
   - component: {fileID: 2045172046}
+  - component: {fileID: 2045172047}
   m_Layer: 0
   m_Name: Theodore
   m_TagString: Untagged
@@ -438,9 +439,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8259b5e9fa11abc4cb82a9918b5cbeb4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerMovement
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerHorizontalMovement
   _walkSpeed: 6
-  _runInputWindow: 0.2
   _runSpeed: 12
 --- !u!50 &2045172043
 Rigidbody2D:
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95f6a8fc459a7774a8ea417ba507b8e6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.PlayerAnimator
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerAnimator
 --- !u!114 &2045172046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +530,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd28ded030ec284db40fc3933eefff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerStateMachine
+--- !u!114 &2045172047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045172037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e186378bd1481297cfa24e669afd1a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerMovementInput
+  _runInputWindow: 0.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

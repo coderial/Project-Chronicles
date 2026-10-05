@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1474745390555617238}
   - component: {fileID: 8600223835187090915}
   - component: {fileID: 3728277839158831543}
+  - component: {fileID: 4018399471293040551}
+  - component: {fileID: 4018399471293040552}
   m_Layer: 0
   m_Name: Theodore
   m_TagString: Untagged
@@ -193,9 +195,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8259b5e9fa11abc4cb82a9918b5cbeb4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerMovement
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerHorizontalMovement
   _walkSpeed: 6
-  _runInputWindow: 0.2
   _runSpeed: 12
 --- !u!114 &3728277839158831543
 MonoBehaviour:
@@ -208,4 +209,29 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95f6a8fc459a7774a8ea417ba507b8e6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.PlayerAnimator
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerAnimator
+--- !u!114 &4018399471293040551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748222006496636296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e186378bd1481297cfa24e669afd1a, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerMovementInput
+  _runInputWindow: 0.2
+--- !u!114 &4018399471293040552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748222006496636296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd28ded030ec284db40fc3933eefff4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerStateMachine

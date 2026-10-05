@@ -4,8 +4,7 @@ namespace Project_Chronicles.Player
     {
         IDLE = 0,
         WALK = 1,
-        DASH = 2,
+        RUN = 2,
         JUMP = 3,
-
     }
 }

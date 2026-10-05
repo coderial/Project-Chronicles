@@ -2,81 +2,36 @@ using UnityEngine;
 
 namespace Project_Chronicles.Player
 {
+    [RequireComponent(typeof(PlayerHorizontalMovement))]
     public sealed class PlayerStateMachine : MonoBehaviour
     {
-        public IState CurrentState { get; private set; }
+        private PlayerHorizontalMovement _movement;
 
-        private IdleState _idle;
-        private RunState _run;
-        private WalkState _walk;
-
-        private PlayerHorizontalMovement _playerHorizontalMovement;
-        private PlayerAnimator _animator;
-        private Rigidbody2D _body;
-
-        //public PlayerState CurrentState => _currentState;
+        public PlayerState CurrentState { get; private set; } = PlayerState.IDLE;
 
         private void Awake()
         {
-            _playerHorizontalMovement = GetComponent<PlayerHorizontalMovement>();
-            _body = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<PlayerAnimator>();
-            InstantiateState();
-            InitializeStates();
+            _movement = GetComponent<PlayerHorizontalMovement>();
         }
 
-        private void Start()
+        private void Update()
         {
-            ChangeState(_idle);
+            CurrentState = ResolveState(_movement.HorizontalVelocity, _movement.IsRunning);
         }
 
-        private void InstantiateState()
+        private void OnDisable()
         {
-            _idle = new IdleState();
-            _run = new RunState();
-            _walk = new WalkState();
+            CurrentState = PlayerState.IDLE;
         }
 
-        private void InitializeStates()
+        public static PlayerState ResolveState(float horizontalVelocity, bool isRunning)
         {
-            _idle.Initialize(_animator);
-            _run.Initialize(_animator);
-            _walk.Initialize(_animator);
-        }
-
-        public void ChangeState(IState newState)
-        {
-            if (newState == null || ReferenceEquals(CurrentState, newState))
+            if (Mathf.Approximately(horizontalVelocity, 0f))
             {
-                return;
+                return PlayerState.IDLE;
             }
-            CurrentState?.Exit();
-            CurrentState = newState;
-            CurrentState.Enter();
-        }
 
-        public void Update()
-        {
-            if (_body.linearVelocity == Vector2.zero)
-            {
-                ChangeState(_idle);
-            }
-            else
-            {
-                if (_playerHorizontalMovement.IsRuning)
-                {
-                    ChangeState(_run);
-                }
-                else
-                {
-                    ChangeState(_walk);
-                }
-            }
-        }
-
-        public void FixedUpdate()
-        {
-            CurrentState.Update();
+            return isRunning ? PlayerState.RUN : PlayerState.WALK;
         }
     }
 }
