@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace Project_Chronicles.Player
+namespace Project_Chronicles.Character
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(PlayerMovementInput))]
-    public sealed class PlayerHorizontalMovement : MonoBehaviour
+    [RequireComponent(typeof(Rigidbody2D), typeof(CharacterMovementInput))]
+    public sealed class CharacterHorizontalMovement : MonoBehaviour
     {
         public const float PrototypeWalkSpeed = 6f;
         public const float PrototypeRunSpeed = 12f;
@@ -14,18 +14,18 @@ namespace Project_Chronicles.Player
         [SerializeField, Min(0f)]
         private float _runSpeed = PrototypeRunSpeed;
 
-        private PlayerMovementInput _input;
+        private CharacterMovementInput _input;
         private Rigidbody2D _body;
 
         public float WalkSpeed => _walkSpeed;
         public float RunSpeed => _runSpeed;
         public float HorizontalVelocity => _body.linearVelocity.x;
         public float FacingDirection { get; private set; } = 1f;
-        public bool IsRunning => isActiveAndEnabled && _input.IsRunning;
+        public bool IsRunning => isActiveAndEnabled && _input.IsDashing;
 
         private void Awake()
         {
-            _input = GetComponent<PlayerMovementInput>();
+            _input = GetComponent<CharacterMovementInput>();
             _body = GetComponent<Rigidbody2D>();
         }
 
@@ -48,7 +48,7 @@ namespace Project_Chronicles.Player
 
         private void OnDisable()
         {
-            _input.CancelRun();
+            _input.CancelDash();
             Vector2 velocity = _body.linearVelocity;
             velocity.x = 0f;
             _body.linearVelocity = velocity;

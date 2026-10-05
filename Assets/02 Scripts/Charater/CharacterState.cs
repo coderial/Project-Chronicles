@@ -1,6 +1,6 @@
-namespace Project_Chronicles.Player
+namespace Project_Chronicles.Character
 {
-    public enum PlayerState
+    public enum CharacterState
     {
         IDLE = 0,
         WALK = 1,
