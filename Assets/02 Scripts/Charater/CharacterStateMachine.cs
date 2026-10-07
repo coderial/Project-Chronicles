@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Project_Chronicles.Character
 {
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(CharacterHorizontalMovement))]
     public sealed class CharacterStateMachine : MonoBehaviour
     {

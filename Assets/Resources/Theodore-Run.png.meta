@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0d1da5232dbd5f844ba5bbe98a097ee4
+guid: 96e59fc18e821a342b8066cd0433b5ac
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7994557146078268730
-    second: sheet-transparent_0
+      213: -6400447462449324388
+    second: Theodore-Run_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sheet-transparent_0
+      name: Theodore-Run_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,14 +128,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c2b173f1a0ad0190800000000000000
-      internalID: -7994557146078268730
+      spriteID: c9e5825a1fa0d27a0800000000000000
+      internalID: -6400447462449324388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheet-transparent_1
+      name: Theodore-Run_1
       rect:
         serializedVersion: 2
         x: 512
@@ -150,14 +150,58 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35b0a3406127e3243a688daa638e2135
-      internalID: -236441216
+      spriteID: ddc993b48502c2d47930dddd08b39692
+      internalID: 1238218162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheet-transparent_2
+      name: Theodore-Run_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8494c5b96e8476408966e178b838221
+      internalID: 1393398939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Theodore-Run_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b312c1f9356757d499bbe86d0c485145
+      internalID: 609114145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Theodore-Run_4
       rect:
         serializedVersion: 2
         x: 0
@@ -172,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 655d61e9b0ac7dd47bd2e1a50b502a1e
-      internalID: 1942977950
+      spriteID: e92e1189ba6275847be25fd6a0586e08
+      internalID: 223816172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sheet-transparent_3
+      name: Theodore-Run_5
       rect:
         serializedVersion: 2
         x: 512
@@ -194,8 +238,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77a3e5d6b27e0ee49b747015aa499b1c
-      internalID: 1113018351
+      spriteID: 94a0320015548c1419a2bd7c2de18b36
+      internalID: 1996536723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Theodore-Run_6
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14ab3f2d90a2b674f895760a2f12686a
+      internalID: -1132865203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Theodore-Run_7
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef741e2f3a23b514c8573b8151ff627f
+      internalID: -1855268420
       vertices: []
       indices: 
       edges: []
@@ -204,7 +292,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 549bdd4dd45bfe346876bf2778eed9cb
+    spriteID: 9761a40050557344894bd6d8284fa253
     internalID: 0
     vertices: []
     indices: 
@@ -214,12 +302,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":2.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":2.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      sheet-transparent_0: -7994557146078268730
-      sheet-transparent_1: -236441216
-      sheet-transparent_2: 1942977950
-      sheet-transparent_3: 1113018351
+      Theodore-Run_0: -6400447462449324388
+      Theodore-Run_1: 1238218162
+      Theodore-Run_2: 1393398939
+      Theodore-Run_3: 609114145
+      Theodore-Run_4: 223816172
+      Theodore-Run_5: 1996536723
+      Theodore-Run_6: -1132865203
+      Theodore-Run_7: -1855268420
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

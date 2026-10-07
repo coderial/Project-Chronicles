@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Project_Chronicles.Character
 {
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(PlayerInputListener), typeof(Collider2D), typeof(Rigidbody2D))]
     public sealed class CharacterVerticalMovement : MonoBehaviour
     {
         public const float PrototypeJumpHeight = 4f;
@@ -33,7 +34,7 @@ namespace Project_Chronicles.Character
         private LayerMask _groundLayers = Physics2D.AllLayers;
 
         private readonly RaycastHit2D[] _groundHits = new RaycastHit2D[4];
-        private CharacterMovementInput _input;
+        private PlayerInputListener _input;
         private Rigidbody2D _body;
         private Collider2D _playerCollider;
         private bool _jumpConsumedSinceGrounded;
@@ -52,7 +53,7 @@ namespace Project_Chronicles.Character
         {
             _body = GetComponent<Rigidbody2D>();
             _playerCollider = GetComponent<Collider2D>();
-            _input = GetComponent<CharacterMovementInput>();
+            _input = GetComponent<PlayerInputListener>();
             _body.gravityScale = CalculateGravityScale(_jumpHeight, _timeToApex, Physics2D.gravity.y);
         }
 

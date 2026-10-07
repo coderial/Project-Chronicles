@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace Project_Chronicles.Character
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(CharacterMovementInput))]
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputListener))]
     public sealed class CharacterHorizontalMovement : MonoBehaviour
     {
         public const float PrototypeWalkSpeed = 6f;
@@ -14,7 +15,7 @@ namespace Project_Chronicles.Character
         [SerializeField, Min(0f)]
         private float _runSpeed = PrototypeRunSpeed;
 
-        private CharacterMovementInput _input;
+        private PlayerInputListener _input;
         private Rigidbody2D _body;
 
         public float WalkSpeed => _walkSpeed;
@@ -25,7 +26,7 @@ namespace Project_Chronicles.Character
 
         private void Awake()
         {
-            _input = GetComponent<CharacterMovementInput>();
+            _input = GetComponent<PlayerInputListener>();
             _body = GetComponent<Rigidbody2D>();
         }
 

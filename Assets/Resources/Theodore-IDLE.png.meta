@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6907363a90b3c0e46b723a5cd1c276ba
+guid: 0d1da5232dbd5f844ba5bbe98a097ee4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2991671180591893383
-    second: Theodore_Walk_0
+      213: -7994557146078268730
+    second: sheet-transparent_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Theodore_Walk_0
+      name: Theodore-IDLE_0
       rect:
         serializedVersion: 2
         x: 0
@@ -126,16 +126,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 974fb0c69e27b76d0800000000000000
-      internalID: -2991671180591893383
+      spriteID: d29bfd4808b8b0d4da0a1ad68531aac4
+      internalID: 1315406560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Theodore_Walk_1
+      name: Theodore-IDLE_1
       rect:
         serializedVersion: 2
         x: 512
@@ -150,36 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efe411937b9e04941af90856049b177a
-      internalID: -450844596
+      spriteID: 22f91cb7de43fbe4aa3b0b9b11f073d8
+      internalID: -2141882916
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Theodore_Walk_2
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fd8bd3b0fcf3ed743ab08dffbe742a67
-      internalID: 1222173928
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Theodore_Walk_3
+      name: Theodore-IDLE_2
       rect:
         serializedVersion: 2
         x: 0
@@ -194,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 440467b8969eaa347ba10adb6819e88a
-      internalID: 414181232
+      spriteID: a3bab7d321964de4fa1e2376602b4aa2
+      internalID: 1614537733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Theodore_Walk_4
+      name: Theodore-IDLE_3
       rect:
         serializedVersion: 2
         x: 512
@@ -216,30 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e7dcffb108b27842ad13fa1735240c9
-      internalID: -1944104975
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Theodore_Walk_5
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8d46e48d3b8156c4c9dd6ad7f8408ce7
-      internalID: 849216184
+      spriteID: 378f673d7dc343c48848cbed0d8a6e52
+      internalID: -1087118152
       vertices: []
       indices: 
       edges: []
@@ -248,7 +204,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3a29c4f1dbe6fc14f8efff23b23208c3
+    spriteID: 549bdd4dd45bfe346876bf2778eed9cb
     internalID: 0
     vertices: []
     indices: 
@@ -258,14 +214,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":2.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":2.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Theodore_Walk_0: -2991671180591893383
-      Theodore_Walk_1: -450844596
-      Theodore_Walk_2: 1222173928
-      Theodore_Walk_3: 414181232
-      Theodore_Walk_4: -1944104975
-      Theodore_Walk_5: 849216184
+      Theodore-IDLE_0: 1315406560
+      Theodore-IDLE_1: -2141882916
+      Theodore-IDLE_2: 1614537733
+      Theodore-IDLE_3: -1087118152
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

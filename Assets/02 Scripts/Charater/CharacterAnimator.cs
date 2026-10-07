@@ -3,6 +3,7 @@ using Project_Chronicles.Common;
 
 namespace Project_Chronicles.Character
 {
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(CharacterStateMachine))]
     public class CharacterAnimator : BaseAnimator
     {

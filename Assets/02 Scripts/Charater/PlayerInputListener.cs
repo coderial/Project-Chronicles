@@ -1,31 +1,38 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Project_Chronicles.Character
 {
     [DisallowMultipleComponent]
-    public sealed class CharacterMovementInput : MonoBehaviour
+    public sealed class PlayerInputListener : MonoBehaviour
     {
         public const float PrototypeDashInputWindow = 0.2f;
 
         [SerializeField, Min(0f)]
         private float _dashInputWindow = PrototypeDashInputWindow;
-
         private PlayerInputSystem _inputSystem;
         private InputAction _moveLeftAction;
         private InputAction _moveRightAction;
+        private InputAction _lightAttackAction;
+        private InputAction _heavyAttackAction;
         private InputAction _jumpAction;
         private float _dashDirection;
         private double _lastLeftPressedTime = double.NegativeInfinity;
         private double _lastRightPressedTime = double.NegativeInfinity;
         private float _lastJumpRequestedTime = float.NegativeInfinity;
 
+        public event Action LightAttackRequested;
+        public event Action HeavyAttackRequested;
+
+        public int LightAttackRequestedCount { get; private set; }
+        public int HeavyAttackRequestedCount { get; private set; }
+
         public float DashInputWindow => _dashInputWindow;
         public float LastJumpRequestedTime => _lastJumpRequestedTime;
         public float HorizontalInput => !isActiveAndEnabled ? 0f :
             (_moveRightAction.IsPressed() ? 1f : 0f) - (_moveLeftAction.IsPressed() ? 1f : 0f);
         public bool IsDashing => _dashDirection != 0f && HorizontalInput == _dashDirection;
-
         public float VerticalInput => !isActiveAndEnabled ? 0f : (_jumpAction.IsPressed() ? 1f : 0f);
 
         private void Awake()
@@ -33,6 +40,8 @@ namespace Project_Chronicles.Character
             _inputSystem = new PlayerInputSystem();
             _moveLeftAction = _inputSystem.Character.MoveLeft;
             _moveRightAction = _inputSystem.Character.MoveRight;
+            _lightAttackAction = _inputSystem.Character.LightAttack;
+            _heavyAttackAction = _inputSystem.Character.HeavyAttack;
             _jumpAction = _inputSystem.Character.Jump;
         }
 
@@ -41,11 +50,17 @@ namespace Project_Chronicles.Character
             _moveLeftAction.performed += OnMoveLeft;
             _moveRightAction.performed += OnMoveRight;
             _jumpAction.performed += OnJump;
+            _lightAttackAction.performed += OnLightAttack;
+            _heavyAttackAction.performed += OnHeavyAttack;
+
             _moveLeftAction.canceled += OnMoveCanceled;
             _moveRightAction.canceled += OnMoveCanceled;
+
             _moveLeftAction.Enable();
             _moveRightAction.Enable();
             _jumpAction.Enable();
+            _lightAttackAction.Enable();
+            _heavyAttackAction.Enable();
         }
 
         private void OnDisable()
@@ -53,11 +68,17 @@ namespace Project_Chronicles.Character
             _moveLeftAction.performed -= OnMoveLeft;
             _moveRightAction.performed -= OnMoveRight;
             _jumpAction.performed -= OnJump;
+            _lightAttackAction.performed -= OnLightAttack;
+            _heavyAttackAction.performed -= OnHeavyAttack;
             _moveLeftAction.canceled -= OnMoveCanceled;
             _moveRightAction.canceled -= OnMoveCanceled;
+
             _moveLeftAction.Disable();
             _moveRightAction.Disable();
             _jumpAction.Disable();
+            _lightAttackAction.Disable();
+            _heavyAttackAction.Disable();
+
             CancelDash();
             CancelJump();
         }
@@ -97,6 +118,16 @@ namespace Project_Chronicles.Character
         private void OnMoveCanceled(InputAction.CallbackContext context)
         {
             StopDashIfDirectionChanged();
+        }
+
+        private void OnLightAttack(InputAction.CallbackContext context)
+        {
+            LightAttackRequested?.Invoke();
+        }
+
+        private void OnHeavyAttack(InputAction.CallbackContext context)
+        {
+            HeavyAttackRequested?.Invoke();
         }
 
         private void TryStartDash(ref double lastPressedTime, float direction, double pressedTime)
