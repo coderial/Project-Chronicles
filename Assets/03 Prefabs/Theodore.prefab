@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 3728277839158831543}
   - component: {fileID: 4018399471293040551}
   - component: {fileID: 4018399471293040552}
+  - component: {fileID: 4018399471293040553}
+  - component: {fileID: 4018399471293040554}
   m_Layer: 0
   m_Name: Theodore
   m_TagString: Untagged
@@ -235,3 +237,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd28ded030ec284db40fc3933eefff4, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerStateMachine
+--- !u!114 &4018399471293040553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748222006496636296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f3b58e1050e0a48b09a92fc14decc0, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.AttackController
+  _z1: {fileID: 11400000, guid: 44c43349a7b1d1c428bb87a36adea48a, type: 2}
+  _x1: {fileID: 0}
+--- !u!114 &4018399471293040554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748222006496636296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27121ee8b1ea9cd4aaa2a08c762d14f3, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.ComboController

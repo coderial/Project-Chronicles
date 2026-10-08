@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6b607efb4c50b642bfe3cdd83625339, type: 3}
-  m_Name: Theodore_Z1
+  m_Name: Theodore_Ground_Z3X
   m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.Combat.AttackData
-  _attackId: Theodore Z1
-  _animation: 
-  _input: 1
+  _attackId: Theodore X4
+  _animation: Base Layer.GroundAttack.Theodore_Z4
+  _input: 2
   _startup: 0.08
-  _active: 0.1
+  _active: 0.8
   _recovery: 0.12
   _activeUntilLanding: 0
   _lockUntilLanding: 0
@@ -29,8 +29,8 @@ MonoBehaviour:
   _downValue: 0
   _forceKnockDown: 0
   _hitStop: 0
-  _comboOpen: 0.12
-  _comboClose: 0.2
+  _comboOpen: 0
+  _comboClose: 0
   _cancelOpen: 0.2
   _nextZ: {fileID: 0}
   _nextX: {fileID: 0}

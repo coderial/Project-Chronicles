@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b607efb4c50b642bfe3cdd83625339, type: 3}
+  m_Name: Theodore_Ground_Z3
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.Combat.AttackData
+  _attackId: Theodore Z3
+  _animation: Base Layer.GroundAttack.Theodore_Z3
+  _input: 1
+  _startup: 0.08
+  _active: 0.4
+  _recovery: 0.06
+  _activeUntilLanding: 0
+  _lockUntilLanding: 0
+  _plungeSpeed: 0
+  _hitBoxOffsetY: 0
+  _damage: 10
+  _hitStun: 0.8
+  _knockbackX: 0
+  _knockbackY: 0
+  _downValue: 0
+  _forceKnockDown: 0
+  _hitStop: 0
+  _comboOpen: 0.1
+  _comboClose: 0.5
+  _cancelOpen: 0.2
+  _nextZ: {fileID: 11400000, guid: cc459fa85fc96c4419f8e88612b43f27, type: 2}
+  _nextX: {fileID: 11400000, guid: 6fc9c73e7feaf9f418e70a900a5e71ee, type: 2}

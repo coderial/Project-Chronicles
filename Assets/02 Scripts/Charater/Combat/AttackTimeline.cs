@@ -7,7 +7,7 @@ namespace Project_Chronicles.Character.Combat
     {
         private AttackData _attack;
         private float _elapsedTime;
-        private float TotalDuration => _attack.Startup + _attack.Active + _attack.Recovery;
+        private float TotalDuration => _attack.Duration;
         public AttackData Attack => _attack;
         public float ElapsedTime => _elapsedTime;
         public AttackPhase Phase { get; private set; } = AttackPhase.INACTIVE;

@@ -7,6 +7,7 @@ namespace Project_Chronicles.Character.Combat
     {
         [Header("Identity")]
         [SerializeField] private string _attackId = string.Empty;
+        [Tooltip("Full Animator state path, e.g. Base Layer.GroundAttack.Theodore_Z1")]
         [SerializeField] private string _animation = string.Empty;
         [SerializeField] private AttackInput _input;
 
@@ -44,6 +45,7 @@ namespace Project_Chronicles.Character.Combat
 
         public float Active => _active;
         public float Recovery => _recovery;
+        public float Duration => _startup + _active + _recovery;
         public bool ActiveUntilLanding => _activeUntilLanding;
         public bool LockUntilLanding => _lockUntilLanding;
         public float PlungeSpeed => _plungeSpeed;
