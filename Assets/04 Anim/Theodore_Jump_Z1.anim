@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Theodore_Z1
+  m_Name: Theodore_Jump_Z1
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,19 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 2322972243268809837, guid: 94f5cbde5da1aa543b8d56968d4b95d5, type: 3}
-    - time: 0.083333336
-      value: {fileID: 1907002340, guid: 94f5cbde5da1aa543b8d56968d4b95d5, type: 3}
-    - time: 0.16666667
-      value: {fileID: -1622479309, guid: 94f5cbde5da1aa543b8d56968d4b95d5, type: 3}
-    - time: 0.25
-      value: {fileID: -1260691873, guid: 94f5cbde5da1aa543b8d56968d4b95d5, type: 3}
+      value: {fileID: -3462465962631214985, guid: e54aa4e2cda585f419ae381c60059831, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 12
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -50,16 +44,13 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 2322972243268809837, guid: 94f5cbde5da1aa543b8d56968d4b95d5, type: 3}
-    - {fileID: 1907002340, guid: 94f5cbde5da1aa543b8d56968d4b95d5, type: 3}
-    - {fileID: -1622479309, guid: 94f5cbde5da1aa543b8d56968d4b95d5, type: 3}
-    - {fileID: -1260691873, guid: 94f5cbde5da1aa543b8d56968d4b95d5, type: 3}
+    - {fileID: -3462465962631214985, guid: e54aa4e2cda585f419ae381c60059831, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.33333334
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

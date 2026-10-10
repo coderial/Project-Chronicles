@@ -6,9 +6,12 @@ namespace Project_Chronicles.Character
         WALK = 1,
         RUN = 2,
         JUMP = 3,
-        ATTACK = 4,
-        HURT = 5,
-        HITSTUN = 6,
-        ULTIMATE = 7,
+        FALL = 4,
+        ATTACK = 5,
+        KNOCKDOWN = 6,
+        HITSTUN = 7,
+        ULTIMATE = 8,
+        DASH_JUMP = 9,
+
     }
 }

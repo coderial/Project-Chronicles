@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6b607efb4c50b642bfe3cdd83625339, type: 3}
-  m_Name: Theodore_Ground_Z3X
+  m_Name: Theodore_Jump_Z1
   m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.Combat.AttackData
-  _attackId: Theodore X4
-  _animation: Base Layer.GroundAttack.Theodore_Z3X
-  _input: 2
+  _attackId: Theodore Z1
+  _animation: Base Layer.JumpAttack.Theodore_Jump_Z1
+  _input: 1
   _startup: 0.08
-  _active: 0.5
-  _recovery: 0.12
-  _activeUntilLanding: 0
+  _active: 0.3
+  _recovery: 0.06
+  _activeUntilLanding: 1
   _lockUntilLanding: 0
   _plungeSpeed: 0
   _hitBoxOffsetY: 0
   _damage: 10
   _hitStun: 0.8
-  _knockbackX: 10
+  _knockbackX: 0
   _knockbackY: 0
   _downValue: 0
   _forceKnockDown: 0
   _hitStop: 0
-  _comboOpen: 0
-  _comboClose: 0
+  _comboOpen: 0.08
+  _comboClose: 0.42
   _cancelOpen: 0.2
   _nextZ: {fileID: 0}
   _nextX: {fileID: 0}

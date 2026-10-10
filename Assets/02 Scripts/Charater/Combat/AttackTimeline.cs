@@ -42,7 +42,7 @@ namespace Project_Chronicles.Character.Combat
             return true;
         }
 
-        public void Tick(float dt)
+        public void Tick(float dt, bool hasLanded = false)
         {
             if (dt < 0f)
             {
@@ -51,6 +51,12 @@ namespace Project_Chronicles.Character.Combat
             }
             if (_attack == null || Phase == AttackPhase.COMPLETE)
             {
+                return;
+            }
+
+            if (hasLanded && (_attack.ActiveUntilLanding || _attack.LockUntilLanding))
+            {
+                Phase = AttackPhase.COMPLETE;
                 return;
             }
 
