@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8760062540329440014}
   - component: {fileID: 7576666339543105323}
   - component: {fileID: 6968205374688506981}
-  - component: {fileID: 4929426259418964433}
+  - component: {fileID: 6053399575113350956}
   m_Layer: 0
   m_Name: Theodore
   m_TagString: Untagged
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e635f614b0d9a34e95b0147ce54f3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.PlayerVerticalMovement
-  _jumpHeight: 2
+  _jumpHeight: 3
   _timeToApex: 0.4
   _coyoteTime: 0.08
   _jumpBufferTime: 0.08
@@ -275,13 +275,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.AttackController
   _groundZ1: {fileID: 11400000, guid: 44c43349a7b1d1c428bb87a36adea48a, type: 2}
   _dashZ1: {fileID: 0}
-  _jumpZ1: {fileID: 0}
+  _jumpZ1: {fileID: 11400000, guid: c01a48478ab6b62458beb6bfb53bfcaf, type: 2}
   _dashJumpZ1: {fileID: 0}
   _groundX1: {fileID: 0}
   _dashX1: {fileID: 0}
   _jumpX1: {fileID: 0}
   _dashJumpX1: {fileID: 0}
---- !u!114 &4929426259418964433
+--- !u!114 &6053399575113350956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -290,6 +290,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 282768583213230162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27121ee8b1ea9cd4aaa2a08c762d14f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ced5bcddf69d354d83303f4a34fe8d2, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.ComboController
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.CharacterController
+  Animator: {fileID: 3937459448596995773}
+  AttackController: {fileID: 6968205374688506981}
+  HorizontalMovement: {fileID: 8987425198743066711}
+  VerticalMovement: {fileID: 7576666339543105323}

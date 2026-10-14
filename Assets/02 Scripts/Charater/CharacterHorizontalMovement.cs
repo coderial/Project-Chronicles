@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project_Chronicles.Character
+namespace Project_Chronicles.Character.StateMachine
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputListener))]
@@ -30,8 +30,9 @@ namespace Project_Chronicles.Character
             _body = GetComponent<Rigidbody2D>();
         }
 
-        private void Update()
+        internal void UpdateFacingDirection(bool canTurn)
         {
+            if (!isActiveAndEnabled || !canTurn) return;
             float horizontalInput = _input.HorizontalInput;
             if (horizontalInput != 0f)
             {
@@ -39,17 +40,24 @@ namespace Project_Chronicles.Character
             }
         }
 
-        private void FixedUpdate()
+        internal void TickMovement(bool canMove)
         {
+            if (!isActiveAndEnabled) return;
             float speed = IsRunning ? _runSpeed : _walkSpeed;
             Vector2 velocity = _body.linearVelocity;
-            velocity.x = CalculateHorizontalVelocity(_input.HorizontalInput, speed);
+            velocity.x = canMove ? CalculateHorizontalVelocity(_input.HorizontalInput, speed) : 0f;
             _body.linearVelocity = velocity;
         }
 
         private void OnDisable()
         {
             _input.CancelDash();
+            Stop();
+        }
+
+        internal void Stop()
+        {
+            if (_body == null) return;
             Vector2 velocity = _body.linearVelocity;
             velocity.x = 0f;
             _body.linearVelocity = velocity;

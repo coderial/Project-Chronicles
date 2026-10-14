@@ -1,10 +1,8 @@
 using Project_Chronicles.Character.Combat;
-using UnityEngine;
 
 namespace Project_Chronicles.Character
 {
-    [DisallowMultipleComponent]
-    public sealed class ComboController : MonoBehaviour
+    public sealed class ComboController
     {
         public AttackData TryGetNextCombo(AttackData current, AttackInput input)
         {

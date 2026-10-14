@@ -1,13 +1,14 @@
 using Project_Chronicles.Character.Combat;
 using Project_Chronicles.Utils;
+using Project_Chronicles.Character.StateMachine;
 using UnityEngine;
 
 namespace Project_Chronicles.Character
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(PlayerInputListener), typeof(ComboController))]
+    [RequireComponent(typeof(PlayerInputListener))]
     [RequireComponent(typeof(CharacterAnimator), typeof(CharacterStateMachine))]
-    public sealed class AttackController : MonoBehaviour
+    public sealed class CharacterAttackController : MonoBehaviour
     {
         [SerializeField] private AttackData _groundZ1;
         [SerializeField] private AttackData _dashZ1;
@@ -19,48 +20,57 @@ namespace Project_Chronicles.Character
         [SerializeField] private AttackData _dashJumpX1;
 
         private readonly AttackTimeline _timeline = new AttackTimeline();
-        private PlayerInputListener _input;
-        private ComboController _combo;
+        private readonly ComboController _combo = new ComboController();
         private CharacterAnimator _animator;
         private CharacterStateMachine _stateMachine;
+        private AttackData _preparedAttack;
+
+        public bool IsAttacking => isActiveAndEnabled && _timeline.IsRunning;
+        public AttackData CurrentAttack => _timeline.Attack;
+        public bool HasPreparedAttack => isActiveAndEnabled && _preparedAttack != null;
+        public bool CanCancel => IsAttacking && !_timeline.Attack.ActiveUntilLanding
+            && !_timeline.Attack.LockUntilLanding && _timeline.ElapsedTime >= _timeline.Attack.CancelOpen;
 
         private void Awake()
         {
-            _input = GetComponent<PlayerInputListener>();
-            _combo = GetComponent<ComboController>();
             _animator = GetComponent<CharacterAnimator>();
             _stateMachine = GetComponent<CharacterStateMachine>();
         }
 
-        private void OnEnable()
+        internal void PrepareOpeningAttack(AttackInput input, CharacterState movementState)
         {
-            _input.LightAttackRequested += TryStartZ1;
-            _input.HeavyAttackRequested += TryStartX1;
-        }
-
-        private void OnDisable()
-        {
-            _input.LightAttackRequested -= TryStartZ1;
-            _input.HeavyAttackRequested -= TryStartX1;
-            _timeline.Reset();
-            _animator.EndAttack();
-        }
-
-        private void Update()
-        {
-            TickAttack(Time.deltaTime);
-        }
-
-        private void TickAttack(float deltaTime)
-        {
-            if (!_timeline.IsRunning) return;
-            bool hasLanded = false;
-            if (_timeline.Attack.ActiveUntilLanding || _timeline.Attack.LockUntilLanding)
+            if (!isActiveAndEnabled) return;
+            AttackData attack = ResolveOpeningAttack(input, movementState);
+            if (attack == null) return;
+            if (!_animator.CanPlayAttack(attack))
             {
-                CharacterState state = _stateMachine.RefreshState();
-                hasLanded = state == CharacterState.IDLE
-                    || state == CharacterState.WALK || state == CharacterState.RUN;
+                Logging.LogError($"[CharacterAttackController] : Missing animation for {attack.AttackId}");
+                return;
             }
+            _preparedAttack = attack;
+        }
+
+        internal void BeginPreparedAttack()
+        {
+            AttackData attack = _preparedAttack;
+            _preparedAttack = null;
+            if (isActiveAndEnabled && attack != null) BeginAttack(attack);
+        }
+
+        internal void ClearPreparedAttack() => _preparedAttack = null;
+
+        internal bool TryBufferInput(AttackInput input)
+        {
+            return IsAttacking && _combo.TryGetNextCombo(_timeline.Attack, input) != null
+                && _timeline.TryBufferInput(input);
+        }
+
+        // Called only by AttackState while the state machine grants attack ownership.
+        internal void TickAttack(float deltaTime)
+        {
+            if (!IsAttacking) return;
+            bool hasLanded = (_timeline.Attack.ActiveUntilLanding || _timeline.Attack.LockUntilLanding)
+                && _stateMachine.IsGrounded;
             _timeline.Tick(deltaTime, hasLanded);
             _animator.SetAttackProgress(_timeline.Attack.Duration > 0f
                 ? _timeline.ElapsedTime / _timeline.Attack.Duration : 1f);
@@ -68,54 +78,28 @@ namespace Project_Chronicles.Character
             if (!_timeline.IsRunning)
             {
                 AttackData next = _combo.TryGetNextCombo(_timeline.Attack, _timeline.BufferInput);
-                if (next != null)
-                {
+                if (next != null && _animator.CanPlayAttack(next))
                     BeginAttack(next);
-                }
                 else
-                {
-                    Logging.Log($"[AttackController] : {_timeline.Attack.AttackId} 콤보 종료");
-                    _timeline.Reset();
-                    _animator.EndAttack();
-                }
+                    Logging.Log($"[CharacterAttackController] : {_timeline.Attack.AttackId} 콤보 종료");
             }
-            
         }
 
         private void BeginAttack(AttackData attack)
         {
             _timeline.Begin(attack);
             _animator.PlayAttack(attack);
-            Logging.Log($"[AttackController] : {attack.AttackId} 실행");
+            Logging.Log($"[CharacterAttackController] : {attack.AttackId} 실행");
         }
 
-        private void TryStartZ1()
+        internal void CancelAttack()
         {
-            TryRequestAttack(AttackInput.LIGHT);
+            _preparedAttack = null;
+            _timeline.Reset();
+            if (_animator != null) _animator.EndAttack();
         }
 
-        private void TryStartX1()
-        {
-            TryRequestAttack(AttackInput.HEAVY);
-        }
-
-        private void TryRequestAttack(AttackInput input)
-        {
-            if (_timeline.IsRunning)
-            {
-                if (_combo.TryGetNextCombo(_timeline.Attack, input) != null)
-                {
-                    _timeline.TryBufferInput(input);
-                }
-                return;
-            }
-            AttackData openingAttack = ResolveOpeningAttack(input, _stateMachine.RefreshState());
-            if (openingAttack == null)
-            {
-                return;
-            }
-            BeginAttack(openingAttack);
-        }
+        private void OnDisable() => CancelAttack();
 
         private AttackData ResolveOpeningAttack(AttackInput input, CharacterState state)
         {
@@ -136,6 +120,5 @@ namespace Project_Chronicles.Character
                     return null;
             }
         }
-
     }
 }

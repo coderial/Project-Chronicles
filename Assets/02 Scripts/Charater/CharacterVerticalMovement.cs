@@ -70,8 +70,9 @@ namespace Project_Chronicles.Character
             return jumpGravity / gravityMagnitude;
         }
 
-        public void FixedUpdate()
+        internal void TickMovement(bool canJump)
         {
+            if (!isActiveAndEnabled) return;
             bool isGrounded = CheckGrounded();
             if (isGrounded && _body.linearVelocity.y <= 0f)
             {
@@ -79,9 +80,13 @@ namespace Project_Chronicles.Character
                 _jumpConsumedSinceGrounded = false;
                 _wasDashJump = false;
             }
+            if (!canJump)
+            {
+                _input.CancelJump();
+                return;
+            }
             float timeSinceJumpRequested = Time.time - _input.LastJumpRequestedTime;
-            bool isJumpHeld = _input.VerticalInput > 0f;
-            if (!isJumpHeld && !IsJumpBuffered(timeSinceJumpRequested, _jumpBufferTime))
+            if (!IsJumpBuffered(timeSinceJumpRequested, _jumpBufferTime))
             {
                 return;
             }
@@ -96,6 +101,14 @@ namespace Project_Chronicles.Character
             Vector2 velocity = _body.linearVelocity;
             velocity.y = CalculateJumpVelocity(_jumpHeight, _timeToApex);
             _body.linearVelocity = velocity;
+        }
+
+        private void OnDisable()
+        {
+            _input.CancelJump();
+            _lastGroundedTime = float.NegativeInfinity;
+            _jumpConsumedSinceGrounded = false;
+            _wasDashJump = false;
         }
 
         public static float CalculateJumpVelocity(float height, float apexTime)

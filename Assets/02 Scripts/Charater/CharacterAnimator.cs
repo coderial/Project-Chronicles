@@ -2,11 +2,13 @@
 using Project_Chronicles.Common;
 using Project_Chronicles.Character.Combat;
 using Project_Chronicles.Utils;
+using Project_Chronicles.Character.StateMachine;
 
 namespace Project_Chronicles.Character
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(CharacterStateMachine))]
+    [RequireComponent(typeof(CharacterHorizontalMovement))]
     public class CharacterAnimator : BaseAnimator
     {
         protected readonly int _walkHash = Animator.StringToHash("IsWalk");
@@ -18,6 +20,7 @@ namespace Project_Chronicles.Character
         [SerializeField] private string _idleAnimation = "Base Layer.Theodore_Idle";
         [SerializeField] private string _walkAnimation = "Base Layer.Theodore_Walk";
         [SerializeField] private string _runAnimation = "Base Layer.Theodore_Run";
+        [SerializeField] private string _jumpAnimation = "Base Layer.Theodore_Jump";
         private bool _isPlayingAttack;
 
         private CharacterStateMachine _stateMachine;
@@ -45,7 +48,28 @@ namespace Project_Chronicles.Character
 
         public void Jump()
         {
-            _animator.SetTrigger(_jumpHash);
+            PlayLocomotion(CharacterState.JUMP);
+        }
+
+        public void PlayLocomotion(CharacterState state)
+        {
+            if (_animator == null) return;
+            SetMovement(state == CharacterState.WALK, state == CharacterState.RUN);
+            _animator.ResetTrigger(_jumpHash);
+            bool airborne = state == CharacterState.JUMP || state == CharacterState.DASH_JUMP
+                || state == CharacterState.FALL;
+            string animation = airborne ? _jumpAnimation
+                : state == CharacterState.RUN ? _runAnimation
+                : state == CharacterState.WALK ? _walkAnimation : _idleAnimation;
+            int hash = Animator.StringToHash(animation);
+            if (_animator.HasState(0, hash))
+                _animator.Play(hash, 0, state == CharacterState.FALL ? 1f : 0f);
+        }
+
+        internal bool CanPlayAttack(AttackData attack)
+        {
+            return attack != null && !string.IsNullOrWhiteSpace(attack.Animation)
+                && _animator.HasState(0, Animator.StringToHash(attack.Animation));
         }
 
         public void PlayAttack(AttackData attack)
@@ -76,11 +100,7 @@ namespace Project_Chronicles.Character
             if (!_isPlayingAttack) return;
             _isPlayingAttack = false;
 
-            CharacterState state = _stateMachine.CurrentState;
-            SetMovement(state == CharacterState.WALK, state == CharacterState.RUN);
-            string animation = state == CharacterState.RUN ? _runAnimation
-                : state == CharacterState.WALK ? _walkAnimation : _idleAnimation;
-            _animator.Play(Animator.StringToHash(animation), 0, 0f);
+            PlayLocomotion(_stateMachine.GetLocomotionState());
         }
     }
 }

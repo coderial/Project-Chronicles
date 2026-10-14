@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b607efb4c50b642bfe3cdd83625339, type: 3}
   m_Name: Theodore_Jump_Z1
   m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.Combat.AttackData
-  _attackId: Theodore Z1
+  _attackId: Theodore Jump Z1
   _animation: Base Layer.JumpAttack.Theodore_Jump_Z1
   _input: 1
   _startup: 0.08
