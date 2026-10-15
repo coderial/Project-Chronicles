@@ -39,7 +39,7 @@ namespace Project_Chronicles.Character
         private Collider2D _playerCollider;
         private bool _jumpConsumedSinceGrounded;
         private float _lastGroundedTime = float.NegativeInfinity;
-        private bool _wasDashJump;
+        private float _dashJumpDirection;
 
         public float JumpHeight => _jumpHeight;
         public float TimeToApex => _timeToApex;
@@ -47,7 +47,7 @@ namespace Project_Chronicles.Character
         public float JumpBufferTime => _jumpBufferTime;
         public float FastFallSpeed => _fastFallSpeed;
         public bool IsGrounded => CheckGrounded();
-        public bool WasDashJump => _wasDashJump;
+        public bool WasDashJump => _dashJumpDirection != 0f;
 
         private void Awake()
         {
@@ -78,7 +78,7 @@ namespace Project_Chronicles.Character
             {
                 _lastGroundedTime = Time.fixedTime;
                 _jumpConsumedSinceGrounded = false;
-                _wasDashJump = false;
+                _dashJumpDirection = 0f;
             }
             if (!canJump)
             {
@@ -97,10 +97,28 @@ namespace Project_Chronicles.Character
             }
             _input.CancelJump();
             _jumpConsumedSinceGrounded = true;
-            _wasDashJump = _input.IsDashing;
+            _dashJumpDirection = _input.IsDashing ? _input.HorizontalInput : 0f;
             Vector2 velocity = _body.linearVelocity;
             velocity.y = CalculateJumpVelocity(_jumpHeight, _timeToApex);
             _body.linearVelocity = velocity;
+        }
+
+        internal void UpdateAirborneDash(bool canMove, bool isGrounded)
+        {
+            if (!isActiveAndEnabled) return;
+            if (isGrounded)
+            {
+                _dashJumpDirection = 0f;
+                return;
+            }
+            if (!canMove) return;
+
+            // Keep the air movement context through the apex and key release.
+            // Reversing direction returns to a normal jump without another impulse.
+            if (WasDashJump && _input.HorizontalInput * _dashJumpDirection < 0f)
+                _dashJumpDirection = 0f;
+            else if (_input.IsDashing)
+                _dashJumpDirection = _input.HorizontalInput;
         }
 
         private void OnDisable()
@@ -108,7 +126,7 @@ namespace Project_Chronicles.Character
             _input.CancelJump();
             _lastGroundedTime = float.NegativeInfinity;
             _jumpConsumedSinceGrounded = false;
-            _wasDashJump = false;
+            _dashJumpDirection = 0f;
         }
 
         public static float CalculateJumpVelocity(float height, float apexTime)

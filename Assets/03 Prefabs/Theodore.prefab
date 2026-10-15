@@ -216,6 +216,7 @@ MonoBehaviour:
   _idleAnimation: Base Layer.Theodore_Idle
   _walkAnimation: Base Layer.Theodore_Walk
   _runAnimation: Base Layer.Theodore_Run
+  _jumpAnimation: Base Layer.Theodore_Jump
 --- !u!114 &8526779434021335306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,3 +298,4 @@ MonoBehaviour:
   AttackController: {fileID: 6968205374688506981}
   HorizontalMovement: {fileID: 8987425198743066711}
   VerticalMovement: {fileID: 7576666339543105323}
+  StateMachine: {fileID: 8526779434021335306}

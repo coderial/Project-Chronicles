@@ -72,6 +72,7 @@ namespace Project_Chronicles.Character.StateMachine
             DeltaTime = deltaTime;
             ApplyPendingHitStun();
 
+            _controller.VerticalMovement.UpdateAirborneDash(CanMove && !_hitStunState.CanEnter(), IsGrounded);
             _controller.HorizontalMovement.UpdateFacingDirection(CanMove && !_hitStunState.CanEnter());
             while (_attackRequests.Count > 0)
             {
@@ -95,6 +96,7 @@ namespace Project_Chronicles.Character.StateMachine
             // An interrupt received before physics must block movement immediately.
             ApplyPendingHitStun();
             ResolveTransition();
+            _controller.VerticalMovement.UpdateAirborneDash(CanMove, IsGrounded);
             _controller.VerticalMovement.TickMovement(CanJump);
             ResolveTransition();
             _controller.HorizontalMovement.TickMovement(CanMove);
@@ -161,6 +163,7 @@ namespace Project_Chronicles.Character.StateMachine
         {
             if (_requestedHitStun <= 0f) return;
             _hitStunState.Extend(_requestedHitStun);
+            _controller.HorizontalMovement.ClearAttackDisplacement();
             _requestedHitStun = 0f;
             _attackRequests.Clear();
             _controller.AttackController.ClearPreparedAttack();

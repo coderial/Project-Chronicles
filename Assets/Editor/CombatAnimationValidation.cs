@@ -78,10 +78,13 @@ public static class CombatAnimationValidation
                 == _machine.CurrentStateInstance, "Character and FSM do not share state instances");
 
             ValidateMovement();
+            ValidateAirDashTransitions();
             ValidateCombos(false);
             ValidateCombos(true);
             ValidateCancelAndHitStun();
             ValidateAirAttack();
+            ValidateAirAttackMovement();
+            ValidateAttackDistance();
             ValidateDisable();
             Debug.Log($"STATE_MACHINE_VALIDATION_PASSED: {_checks} checks; movement, dash, jump/fall, ZZZZ/ZZZX, animation sampling, cancels, hit priority, landing, disable/re-enable.");
         }
@@ -140,6 +143,71 @@ public static class CombatAnimationValidation
         Ground();
         _machine.Tick(0f);
         PhysicsTick();
+    }
+
+    private static void ValidateAirDashTransitions()
+    {
+        var vertical = _character.GetComponent<CharacterVerticalMovement>();
+        var horizontal = _character.GetComponent<CharacterHorizontalMovement>();
+        var dashAttackField = typeof(CharacterAttackController).GetField("_dashJumpZ1", PrivateInstance);
+        var originalDashAttack = (AttackData)dashAttackField.GetValue(_attacks);
+        var dashAttack = UnityEngine.Object.Instantiate(
+            AssetDatabase.LoadAssetAtPath<AttackData>("Assets/05 Data/Theodore_Jump_Z1.asset"));
+        dashAttackField.SetValue(_attacks, dashAttack);
+        try
+        {
+            foreach (float verticalSpeed in new[] { 2f, -2f })
+            foreach (int direction in new[] { 1, -1 })
+            {
+                SetKeys();
+                _input.CancelDash();
+                Ground();
+                _machine.Tick(0f);
+                PhysicsTick();
+                _character.transform.position += Vector3.up * 3f;
+                Physics2D.SyncTransforms();
+                _body.linearVelocity = new Vector2(0f, verticalSpeed);
+                Key forward = direction > 0 ? Key.RightArrow : Key.LeftArrow;
+                Key reverse = direction > 0 ? Key.LeftArrow : Key.RightArrow;
+                SetKeys(forward);
+                SetKeys();
+                SetKeys(forward);
+                // Physics must also update the context when it runs before Update.
+                PhysicsTick();
+                Require(vertical.WasDashJump, "Air dash did not promote jump/fall to dash jump");
+                Require(_machine.CurrentState == (verticalSpeed > 0f ? CharacterState.DASH_JUMP : CharacterState.FALL),
+                    "Air dash lost the rising/falling phase");
+                Require(Mathf.Approximately(_body.linearVelocity.y, verticalSpeed), "Air dash reapplied a jump impulse");
+                Require(Mathf.Approximately(_body.linearVelocity.x, direction * horizontal.RunSpeed), "Air dash did not apply run speed");
+                _machine.RequestAttack(AttackInput.LIGHT);
+                _machine.Tick(0f);
+                Require(_attacks.CurrentAttack == dashAttack, "Air dash did not update the opening attack context");
+                _machine.RequestHitStun(0.01f);
+                _machine.Tick(0.02f);
+
+                SetKeys(reverse);
+                _machine.Tick(0f);
+                PhysicsTick();
+                Require(!vertical.WasDashJump, "Reverse input did not clear dash jump");
+                Require(_machine.GetLocomotionState() == (verticalSpeed > 0f ? CharacterState.JUMP : CharacterState.FALL),
+                    "Reverse input did not restore normal jump/fall");
+                Require(Mathf.Approximately(_body.linearVelocity.x, -direction * horizontal.WalkSpeed), "Reverse input did not restore walk speed");
+                Require(Mathf.Approximately(_body.linearVelocity.y, verticalSpeed), "Reversing air dash changed vertical velocity");
+                _machine.RequestAttack(AttackInput.LIGHT);
+                _machine.Tick(0f);
+                Require(_attacks.CurrentAttack != dashAttack, "Reverse input retained the dash attack context");
+                Ground();
+                SetKeys();
+                _machine.Tick(0f);
+                PhysicsTick();
+                Require(!vertical.WasDashJump, "Landing retained the air dash context");
+            }
+        }
+        finally
+        {
+            dashAttackField.SetValue(_attacks, originalDashAttack);
+            UnityEngine.Object.DestroyImmediate(dashAttack);
+        }
     }
 
     private static void ValidateCombos(bool branchToX)
@@ -264,6 +332,123 @@ public static class CombatAnimationValidation
         _machine.Tick(0f);
         Require(_machine.IsGrounded && _machine.CurrentState == CharacterState.IDLE
             && !_attacks.IsAttacking, "Landing was inferred from Attack state rather than physics");
+    }
+
+    private static void ValidateAirAttackMovement()
+    {
+        var horizontal = _character.GetComponent<CharacterHorizontalMovement>();
+        var attackField = typeof(CharacterAttackController).GetField("_jumpZ1", PrivateInstance);
+        var originalAttack = (AttackData)attackField.GetValue(_attacks);
+        var attack = UnityEngine.Object.Instantiate(originalAttack);
+        attackField.SetValue(_attacks, attack);
+        try
+        {
+            foreach (bool locked in new[] { false, true })
+            foreach (int direction in new[] { 1, -1 })
+            {
+                typeof(AttackData).GetField("_lockUntilLanding", PrivateInstance).SetValue(attack, locked);
+                SetKeys();
+                _input.CancelDash();
+                Ground();
+                _machine.Tick(0f);
+                PhysicsTick();
+                Key forward = direction > 0 ? Key.RightArrow : Key.LeftArrow;
+                Key reverse = direction > 0 ? Key.LeftArrow : Key.RightArrow;
+                SetKeys(forward);
+                _machine.Tick(0f);
+                SetKeys();
+                _input.CancelDash();
+                _character.transform.position += Vector3.up * 3f;
+                Physics2D.SyncTransforms();
+                _body.linearVelocity = Vector2.down;
+                _machine.RequestAttack(AttackInput.LIGHT);
+                _machine.Tick(0f);
+                SetKeys(forward);
+                _machine.Tick(0.01f);
+                PhysicsTick();
+                Require(_machine.CurrentState == CharacterState.ATTACK && _attacks.CurrentAttack == attack,
+                    "Forward movement canceled the air attack");
+                Require(Mathf.Approximately(_body.linearVelocity.x, locked ? 0f : direction * horizontal.WalkSpeed),
+                    "Air attack movement did not respect Lock Until Landing");
+                AssertAnimation(attack.Animation);
+                SetKeys(reverse);
+                _machine.Tick(0f);
+                PhysicsTick();
+                Require(Mathf.Approximately(_body.linearVelocity.x, 0f) && horizontal.FacingDirection == direction,
+                    "Reverse input moved or turned an air attack");
+                Require(_attacks.IsAttacking, "Reverse input canceled the air attack");
+                SetKeys();
+                PhysicsTick();
+                Require(Mathf.Approximately(_body.linearVelocity.x, 0f), "Released air attack movement did not stop");
+                Ground();
+                _machine.Tick(0f);
+                Require(!_attacks.IsAttacking, "Moving air attack did not finish on landing");
+            }
+        }
+        finally
+        {
+            attackField.SetValue(_attacks, originalAttack);
+            UnityEngine.Object.DestroyImmediate(attack);
+        }
+    }
+
+    private static void ValidateAttackDistance()
+    {
+        var attackField = typeof(CharacterAttackController).GetField("_groundZ1", PrivateInstance);
+        var originalAttack = (AttackData)attackField.GetValue(_attacks);
+        var attack = UnityEngine.Object.Instantiate(originalAttack);
+        typeof(AttackData).GetField("_nextZ", PrivateInstance).SetValue(attack, null);
+        typeof(AttackData).GetField("_nextX", PrivateInstance).SetValue(attack, null);
+        attackField.SetValue(_attacks, attack);
+        try
+        {
+            foreach (float distance in new[] { 2f, -2f, 0f })
+            foreach (int direction in new[] { 1, -1 })
+            {
+                typeof(AttackData).GetField("_moveDistance", PrivateInstance).SetValue(attack, distance);
+                SetKeys();
+                _input.CancelDash();
+                Ground();
+                _machine.Tick(0f);
+                SetKeys(direction > 0 ? Key.RightArrow : Key.LeftArrow);
+                _machine.Tick(0f);
+                SetKeys();
+                _input.CancelDash();
+                _machine.Tick(0f);
+                _machine.RequestAttack(AttackInput.LIGHT);
+                _machine.Tick(0f);
+                Require(_attacks.CurrentAttack == attack, "Distance validation selected the wrong attack");
+
+                // Several render updates accumulate, but each displacement is applied only once.
+                _machine.Tick(attack.Duration * 0.25f);
+                _machine.Tick(attack.Duration * 0.25f);
+                PhysicsTick();
+                float expectedHalfDistance = direction * distance * 0.5f;
+                Require(Mathf.Abs(_body.linearVelocity.x * Time.fixedDeltaTime - expectedHalfDistance) < 0.0001f,
+                    "Attack distance did not track half of the total attack duration");
+                PhysicsTick();
+                Require(Mathf.Approximately(_body.linearVelocity.x, 0f), "Attack displacement was applied twice");
+                _machine.Tick(attack.Duration);
+                Require(!_attacks.IsAttacking, "Distance validation attack did not finish");
+                PhysicsTick();
+                Require(Mathf.Abs(_body.linearVelocity.x * Time.fixedDeltaTime - expectedHalfDistance) < 0.0001f,
+                    "Attack completion lost or overshot its final displacement");
+                PhysicsTick();
+                Require(Mathf.Approximately(_body.linearVelocity.x, 0f), "Completed attack continued moving");
+
+                _machine.RequestAttack(AttackInput.LIGHT);
+                _machine.Tick(attack.Duration * 0.25f);
+                _machine.RequestHitStun(0.1f);
+                PhysicsTick();
+                Require(Mathf.Approximately(_body.linearVelocity.x, 0f), "HitStun applied queued attack movement");
+                _machine.Tick(0.2f);
+            }
+        }
+        finally
+        {
+            attackField.SetValue(_attacks, originalAttack);
+            UnityEngine.Object.DestroyImmediate(attack);
+        }
     }
 
     private static void ValidateDisable()

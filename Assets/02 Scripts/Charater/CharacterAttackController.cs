@@ -23,7 +23,9 @@ namespace Project_Chronicles.Character
         private readonly ComboController _combo = new ComboController();
         private CharacterAnimator _animator;
         private CharacterStateMachine _stateMachine;
+        private CharacterHorizontalMovement _movement;
         private AttackData _preparedAttack;
+        private float _attackDirection;
 
         public bool IsAttacking => isActiveAndEnabled && _timeline.IsRunning;
         public AttackData CurrentAttack => _timeline.Attack;
@@ -35,6 +37,7 @@ namespace Project_Chronicles.Character
         {
             _animator = GetComponent<CharacterAnimator>();
             _stateMachine = GetComponent<CharacterStateMachine>();
+            _movement = GetComponent<CharacterHorizontalMovement>();
         }
 
         internal void PrepareOpeningAttack(AttackInput input, CharacterState movementState)
@@ -71,7 +74,15 @@ namespace Project_Chronicles.Character
             if (!IsAttacking) return;
             bool hasLanded = (_timeline.Attack.ActiveUntilLanding || _timeline.Attack.LockUntilLanding)
                 && _stateMachine.IsGrounded;
+            float previousTime = _timeline.ElapsedTime;
             _timeline.Tick(deltaTime, hasLanded);
+            float duration = _timeline.Attack.Duration;
+            if (duration > 0f)
+            {
+                float progressDelta = Mathf.Clamp01(_timeline.ElapsedTime / duration)
+                    - Mathf.Clamp01(previousTime / duration);
+                _movement.QueueAttackDisplacement(_timeline.Attack.MoveDistance * _attackDirection * progressDelta);
+            }
             _animator.SetAttackProgress(_timeline.Attack.Duration > 0f
                 ? _timeline.ElapsedTime / _timeline.Attack.Duration : 1f);
 
@@ -88,12 +99,17 @@ namespace Project_Chronicles.Character
         private void BeginAttack(AttackData attack)
         {
             _timeline.Begin(attack);
+            _attackDirection = _movement.FacingDirection;
             _animator.PlayAttack(attack);
             Logging.Log($"[CharacterAttackController] : {attack.AttackId} 실행");
         }
 
-        internal void CancelAttack()
+        internal void CancelAttack(bool preserveCompletedMovement = false)
         {
+            // Natural completion keeps the final frame's displacement for the next physics step.
+            // Cancels, interrupts and disables discard movement that has not been applied yet.
+            if (!preserveCompletedMovement || _timeline.Phase != AttackPhase.COMPLETE)
+                _movement?.ClearAttackDisplacement();
             _preparedAttack = null;
             _timeline.Reset();
             if (_animator != null) _animator.EndAttack();

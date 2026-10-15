@@ -17,12 +17,14 @@ namespace Project_Chronicles.Character.StateMachine
 
         private PlayerInputListener _input;
         private Rigidbody2D _body;
+        private float _pendingAttackDisplacement;
 
         public float WalkSpeed => _walkSpeed;
         public float RunSpeed => _runSpeed;
         public float HorizontalVelocity => _body.linearVelocity.x;
         public float FacingDirection { get; private set; } = 1f;
         public bool IsRunning => isActiveAndEnabled && _input.IsDashing;
+        public bool IsMovingForward => isActiveAndEnabled && _input.HorizontalInput * FacingDirection > 0f;
 
         private void Awake()
         {
@@ -46,8 +48,18 @@ namespace Project_Chronicles.Character.StateMachine
             float speed = IsRunning ? _runSpeed : _walkSpeed;
             Vector2 velocity = _body.linearVelocity;
             velocity.x = canMove ? CalculateHorizontalVelocity(_input.HorizontalInput, speed) : 0f;
+            // Consume combat-clock displacement once through physics, alongside player input.
+            velocity.x += _pendingAttackDisplacement / Time.fixedDeltaTime;
+            _pendingAttackDisplacement = 0f;
             _body.linearVelocity = velocity;
         }
+
+        internal void QueueAttackDisplacement(float displacement)
+        {
+            if (isActiveAndEnabled) _pendingAttackDisplacement += displacement;
+        }
+
+        internal void ClearAttackDisplacement() => _pendingAttackDisplacement = 0f;
 
         private void OnDisable()
         {
@@ -57,6 +69,7 @@ namespace Project_Chronicles.Character.StateMachine
 
         internal void Stop()
         {
+            ClearAttackDisplacement();
             if (_body == null) return;
             Vector2 velocity = _body.linearVelocity;
             velocity.x = 0f;

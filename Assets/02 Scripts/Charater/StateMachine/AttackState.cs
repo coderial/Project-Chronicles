@@ -9,7 +9,10 @@ namespace Project_Chronicles.Character.StateMachine
         }
 
         public override CharacterState StateType => CharacterState.ATTACK;
-        public override bool AllowsMovement => false;
+        public override bool AllowsMovement => Controller.AttackController.IsAttacking
+            && !Controller.StateMachine.IsGrounded
+            && !Controller.AttackController.CurrentAttack.LockUntilLanding
+            && Controller.HorizontalMovement.IsMovingForward;
         public override bool AllowsJump => false;
 
         private bool WantsMovementCancel => Controller.AttackController.CanCancel
@@ -26,6 +29,6 @@ namespace Project_Chronicles.Character.StateMachine
 
         public override void Enter() => Controller.AttackController.BeginPreparedAttack();
         public override void Update() => Controller.AttackController.TickAttack(Controller.StateMachine.DeltaTime);
-        public override void Exit() => Controller.AttackController.CancelAttack();
+        public override void Exit() => Controller.AttackController.CancelAttack(preserveCompletedMovement: true);
     }
 }

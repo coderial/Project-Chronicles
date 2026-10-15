@@ -21,6 +21,7 @@ MonoBehaviour:
   _activeUntilLanding: 0
   _lockUntilLanding: 0
   _plungeSpeed: 0
+  _moveDistance: 0.5
   _hitBoxOffsetY: 0
   _damage: 10
   _hitStun: 0.8

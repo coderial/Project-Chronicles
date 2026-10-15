@@ -19,6 +19,10 @@ namespace Project_Chronicles.Character.Combat
         [SerializeField] private bool _lockUntilLanding;
         [SerializeField, Min(0f)] private float _plungeSpeed;
 
+        [Header("Movement")]
+        [Tooltip("Horizontal distance over Startup + Active + Recovery, in world units. Positive moves forward; negative moves backward. Landing-bound attacks stop moving after this duration, or earlier on landing.")]
+        [SerializeField] private float _moveDistance;
+
         [Header("Hits")]
         [SerializeField] private float _hitBoxOffsetY;
         [SerializeField, Min(0f)] private float _damage;
@@ -49,6 +53,7 @@ namespace Project_Chronicles.Character.Combat
         public bool ActiveUntilLanding => _activeUntilLanding;
         public bool LockUntilLanding => _lockUntilLanding;
         public float PlungeSpeed => _plungeSpeed;
+        public float MoveDistance => _moveDistance;
         public float HitBoxOffsetY => _hitBoxOffsetY;
         public float Damage => _damage;
         public float HitStun => _hitStun;
