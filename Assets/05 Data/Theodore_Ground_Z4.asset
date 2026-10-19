@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6b607efb4c50b642bfe3cdd83625339, type: 3}
   m_Name: Theodore_Ground_Z4
-  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Character.Combat.AttackData
+  m_EditorClassIdentifier: Assembly-CSharp::Project_Chronicles.Player.Combat.AttackData
   _attackId: Theodore Z4
   _animation: Base Layer.GroundAttack.Theodore_Z4
   _input: 1
