@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "canvas_px": [
+    1024,
+    1024
+  ],
+  "coordinate_system": "top-left origin; x right, y down; pixel-edge coordinates",
+  "source_transform": {
+    "scale": 2,
+    "offset_px": [
+      0,
+      0
+    ]
+  },
+  "facing": "right",
+  "pivot_status": "artist-estimated from image, not anatomically measured",
+  "parts": {
+    "Pelvis": {
+      "pivot_px": [
+        504,
+        592
+      ],
+      "end_px": [
+        504,
+        644
+      ],
+      "parent": null,
+      "file": "Parts/Pelvis.png",
+      "provenance": "AI hidden-body reconstruction",
+      "unity_full_canvas_pivot": [
+        0.4921875,
+        0.421875
+      ],
+      "alpha_bbox_px": [
+        464,
+        540,
+        555,
+        662
+      ]
+    },
+    "Torso": {
+      "pivot_px": [
+        504,
+        562
+      ],
+      "end_px": [
+        498,
+        372
+      ],
+      "parent": "Pelvis",
+      "file": "Parts/Torso.png",
+      "provenance": "AI hidden-body reconstruction",
+      "unity_full_canvas_pivot": [
+        0.4921875,
+        0.451171875
+      ],
+      "alpha_bbox_px": [
+        448,
+        358,
+        562,
+        585
+      ]
+    },
+    "Arm_Far_Upper": {
+      "pivot_px": [
+        528,
+        430
+      ],
+      "end_px": [
+        554,
+        526
+      ],
+      "parent": "Torso",
+      "file": "Parts/Arm_Far_Upper.png",
+      "provenance": "AI shoulder extension + original sleeve",
+      "unity_full_canvas_pivot": [
+        0.515625,
+        0.580078125
+      ],
+      "alpha_bbox_px": [
+        504,
+        414,
+        571,
+        553
+      ]
+    },
+    "Arm_Far_Lower": {
+      "pivot_px": [
+        554,
+        526
+      ],
+      "end_px": [
+        578,
+        614
+      ],
+      "parent": "Arm_Far_Upper",
+      "file": "Parts/Arm_Far_Lower.png",
+      "provenance": "AI overlap + original cuff",
+      "unity_full_canvas_pivot": [
+        0.541015625,
+        0.486328125
+      ],
+      "alpha_bbox_px": [
+        522,
+        500,
+        593,
+        619
+      ]
+    },
+    "Hand_Far": {
+      "pivot_px": [
+        578,
+        614
+      ],
+      "end_px": [
+        580,
+        644
+      ],
+      "parent": "Arm_Far_Lower",
+      "file": "Parts/Hand_Far.png",
+      "provenance": "AI wrist extension + original hand",
+      "unity_full_canvas_pivot": [
+        0.564453125,
+        0.400390625
+      ],
+      "alpha_bbox_px": [
+        566,
+        604,
+        599,
+        661
+      ]
+    },
+    "Arm_Near_Upper": {
+      "pivot_px": [
+        462,
+        428
+      ],
+      "end_px": [
+        450,
+        518
+      ],
+      "parent": "Torso",
+      "file": "Parts/Arm_Near_Upper.png",
+      "provenance": "AI shoulder extension + original sleeve",
+      "unity_full_canvas_pivot": [
+        0.451171875,
+        0.58203125
+      ],
+      "alpha_bbox_px": [
+        413,
+        402,
+        495,
+        545
+      ]
+    },
+    "Arm_Near_Lower": {
+      "pivot_px": [
+        450,
+        518
+      ],
+      "end_px": [
+        464,
+        612
+      ],
+      "parent": "Arm_Near_Upper",
+      "file": "Parts/Arm_Near_Lower.png",
+      "provenance": "AI overlap + original cuff",
+      "unity_full_canvas_pivot": [
+        0.439453125,
+        0.494140625
+      ],
+      "alpha_bbox_px": [
+        396,
+        492,
+        489,
+        617
+      ]
+    },
+    "Hand_Near": {
+      "pivot_px": [
+        464,
+        612
+      ],
+      "end_px": [
+        468,
+        646
+      ],
+      "parent": "Arm_Near_Lower",
+      "file": "Parts/Hand_Near.png",
+      "provenance": "AI wrist extension + original hand",
+      "unity_full_canvas_pivot": [
+        0.453125,
+        0.40234375
+      ],
+      "alpha_bbox_px": [
+        442,
+        598,
+        489,
+        659
+      ]
+    },
+    "Leg_Far_Upper": {
+      "pivot_px": [
+        532,
+        610
+      ],
+      "end_px": [
+        536,
+        790
+      ],
+      "parent": "Pelvis",
+      "file": "Parts/Leg_Far_Upper.png",
+      "provenance": "AI hidden thigh + original visible trousers",
+      "unity_full_canvas_pivot": [
+        0.51953125,
+        0.404296875
+      ],
+      "alpha_bbox_px": [
+        500,
+        582,
+        565,
+        825
+      ]
+    },
+    "Leg_Far_Lower": {
+      "pivot_px": [
+        536,
+        790
+      ],
+      "end_px": [
+        546,
+        914
+      ],
+      "parent": "Leg_Far_Upper",
+      "file": "Parts/Leg_Far_Lower.png",
+      "provenance": "AI joint overlap + original visible trousers",
+      "unity_full_canvas_pivot": [
+        0.5234375,
+        0.228515625
+      ],
+      "alpha_bbox_px": [
+        506,
+        756,
+        596,
+        927
+      ]
+    },
+    "Foot_Far": {
+      "pivot_px": [
+        546,
+        914
+      ],
+      "end_px": [
+        614,
+        944
+      ],
+      "parent": "Leg_Far_Lower",
+      "file": "Parts/Foot_Far.png",
+      "provenance": "AI ankle overlap + original boot",
+      "unity_full_canvas_pivot": [
+        0.533203125,
+        0.107421875
+      ],
+      "alpha_bbox_px": [
+        509,
+        896,
+        630,
+        963
+      ]
+    },
+    "Leg_Near_Upper": {
+      "pivot_px": [
+        478,
+        610
+      ],
+      "end_px": [
+        448,
+        796
+      ],
+      "parent": "Pelvis",
+      "file": "Parts/Leg_Near_Upper.png",
+      "provenance": "AI hidden thigh + original visible trousers",
+      "unity_full_canvas_pivot": [
+        0.466796875,
+        0.404296875
+      ],
+      "alpha_bbox_px": [
+        412,
+        586,
+        506,
+        831
+      ]
+    },
+    "Leg_Near_Lower": {
+      "pivot_px": [
+        448,
+        796
+      ],
+      "end_px": [
+        436,
+        918
+      ],
+      "parent": "Leg_Near_Upper",
+      "file": "Parts/Leg_Near_Lower.png",
+      "provenance": "AI joint overlap + original visible trousers",
+      "unity_full_canvas_pivot": [
+        0.4375,
+        0.22265625
+      ],
+      "alpha_bbox_px": [
+        396,
+        762,
+        473,
+        931
+      ]
+    },
+    "Foot_Near": {
+      "pivot_px": [
+        436,
+        918
+      ],
+      "end_px": [
+        484,
+        952
+      ],
+      "parent": "Leg_Near_Lower",
+      "file": "Parts/Foot_Near.png",
+      "provenance": "AI ankle overlap + original boot",
+      "unity_full_canvas_pivot": [
+        0.42578125,
+        0.103515625
+      ],
+      "alpha_bbox_px": [
+        396,
+        900,
+        502,
+        971
+      ]
+    },
+    "Coat_Inner": {
+      "pivot_px": [
+        554,
+        572
+      ],
+      "end_px": [
+        584,
+        806
+      ],
+      "parent": "Pelvis",
+      "file": "Parts/Coat_Inner.png",
+      "provenance": "AI lining reconstruction + original visible lining",
+      "unity_full_canvas_pivot": [
+        0.541015625,
+        0.44140625
+      ],
+      "alpha_bbox_px": [
+        546,
+        562,
+        599,
+        829
+      ]
+    },
+    "Coat_Back": {
+      "pivot_px": [
+        470,
+        580
+      ],
+      "end_px": [
+        432,
+        700
+      ],
+      "parent": "Pelvis",
+      "file": "Parts/Coat_Back.png",
+      "provenance": "AI missing cloth + original skirt",
+      "unity_full_canvas_pivot": [
+        0.458984375,
+        0.43359375
+      ],
+      "alpha_bbox_px": [
+        385,
+        560,
+        488,
+        741
+      ]
+    },
+    "Coat_Back_Tip": {
+      "pivot_px": [
+        432,
+        700
+      ],
+      "end_px": [
+        394,
+        786
+      ],
+      "parent": "Coat_Back",
+      "file": "Parts/Coat_Back_Tip.png",
+      "provenance": "Original hem/ornament + AI overlap",
+      "unity_full_canvas_pivot": [
+        0.421875,
+        0.31640625
+      ],
+      "alpha_bbox_px": [
+        352,
+        660,
+        457,
+        807
+      ]
+    },
+    "Coat_Front": {
+      "pivot_px": [
+        504,
+        580
+      ],
+      "end_px": [
+        476,
+        706
+      ],
+      "parent": "Pelvis",
+      "file": "Parts/Coat_Front.png",
+      "provenance": "AI missing cloth + original skirt",
+      "unity_full_canvas_pivot": [
+        0.4921875,
+        0.43359375
+      ],
+      "alpha_bbox_px": [
+        427,
+        558,
+        534,
+        747
+      ]
+    },
+    "Coat_Front_Tip": {
+      "pivot_px": [
+        476,
+        706
+      ],
+      "end_px": [
+        464,
+        816
+      ],
+      "parent": "Coat_Front",
+      "file": "Parts/Coat_Front_Tip.png",
+      "provenance": "Original hem/ornament + AI overlap",
+      "unity_full_canvas_pivot": [
+        0.46484375,
+        0.310546875
+      ],
+      "alpha_bbox_px": [
+        402,
+        666,
+        519,
+        839
+      ]
+    },
+    "Coat_Body": {
+      "pivot_px": [
+        502,
+        558
+      ],
+      "end_px": [
+        490,
+        380
+      ],
+      "parent": "Torso",
+      "file": "Parts/Coat_Body.png",
+      "provenance": "AI hidden shoulder + original hood/chest; cloth patch under ornaments",
+      "unity_full_canvas_pivot": [
+        0.490234375,
+        0.455078125
+      ],
+      "alpha_bbox_px": [
+        416,
+        359,
+        567,
+        601
+      ]
+    },
+    "Decoration_Brooch": {
+      "pivot_px": [
+        520,
+        424
+      ],
+      "end_px": [
+        524,
+        436
+      ],
+      "parent": "Coat_Body",
+      "file": "Parts/Decoration_Brooch.png",
+      "provenance": "Original brooch",
+      "unity_full_canvas_pivot": [
+        0.5078125,
+        0.5859375
+      ],
+      "alpha_bbox_px": [
+        508,
+        408,
+        537,
+        445
+      ]
+    },
+    "Decoration_Tassels": {
+      "pivot_px": [
+        526,
+        440
+      ],
+      "end_px": [
+        526,
+        484
+      ],
+      "parent": "Coat_Body",
+      "file": "Parts/Decoration_Tassels.png",
+      "provenance": "Original chain and tassels",
+      "unity_full_canvas_pivot": [
+        0.513671875,
+        0.5703125
+      ],
+      "alpha_bbox_px": [
+        512,
+        434,
+        567,
+        493
+      ]
+    },
+    "Head": {
+      "pivot_px": [
+        500,
+        366
+      ],
+      "end_px": [
+        504,
+        290
+      ],
+      "parent": "Torso",
+      "file": "Parts/Head.png",
+      "provenance": "Original head and hair; purple edge decontamination; 2x resample",
+      "unity_full_canvas_pivot": [
+        0.48828125,
+        0.642578125
+      ],
+      "alpha_bbox_px": [
+        433,
+        232,
+        568,
+        375
+      ]
+    }
+  }
+}

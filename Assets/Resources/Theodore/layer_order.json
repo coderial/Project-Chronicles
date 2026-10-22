@@ -1,0 +1,28 @@
+{
+  "direction": "back-to-front",
+  "layers": [
+    "Coat_Back",
+    "Coat_Back_Tip",
+    "Arm_Far_Upper",
+    "Arm_Far_Lower",
+    "Hand_Far",
+    "Leg_Far_Upper",
+    "Leg_Far_Lower",
+    "Foot_Far",
+    "Coat_Inner",
+    "Leg_Near_Upper",
+    "Leg_Near_Lower",
+    "Foot_Near",
+    "Pelvis",
+    "Torso",
+    "Coat_Front",
+    "Coat_Front_Tip",
+    "Coat_Body",
+    "Head",
+    "Decoration_Brooch",
+    "Decoration_Tassels",
+    "Arm_Near_Upper",
+    "Arm_Near_Lower",
+    "Hand_Near"
+  ]
+}

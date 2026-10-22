@@ -1,0 +1,443 @@
+{
+  "width": 1024,
+  "height": 1024,
+  "parts": [
+    {
+      "name": "Pelvis",
+      "parent": "",
+      "pivot": [
+        504,
+        592
+      ],
+      "end": [
+        504,
+        644
+      ],
+      "order": 12,
+      "sourceBounds": [
+        464,
+        540,
+        555,
+        662
+      ]
+    },
+    {
+      "name": "Torso",
+      "parent": "Pelvis",
+      "pivot": [
+        504,
+        562
+      ],
+      "end": [
+        498,
+        372
+      ],
+      "order": 13,
+      "sourceBounds": [
+        448,
+        358,
+        562,
+        585
+      ]
+    },
+    {
+      "name": "Arm_Far_Upper",
+      "parent": "Torso",
+      "pivot": [
+        528,
+        430
+      ],
+      "end": [
+        554,
+        526
+      ],
+      "order": 2,
+      "sourceBounds": [
+        504,
+        414,
+        571,
+        553
+      ]
+    },
+    {
+      "name": "Arm_Far_Lower",
+      "parent": "Arm_Far_Upper",
+      "pivot": [
+        554,
+        526
+      ],
+      "end": [
+        578,
+        614
+      ],
+      "order": 3,
+      "sourceBounds": [
+        522,
+        500,
+        593,
+        619
+      ]
+    },
+    {
+      "name": "Hand_Far",
+      "parent": "Arm_Far_Lower",
+      "pivot": [
+        578,
+        614
+      ],
+      "end": [
+        580,
+        644
+      ],
+      "order": 4,
+      "sourceBounds": [
+        566,
+        604,
+        599,
+        661
+      ]
+    },
+    {
+      "name": "Arm_Near_Upper",
+      "parent": "Torso",
+      "pivot": [
+        462,
+        428
+      ],
+      "end": [
+        450,
+        518
+      ],
+      "order": 20,
+      "sourceBounds": [
+        413,
+        402,
+        495,
+        545
+      ]
+    },
+    {
+      "name": "Arm_Near_Lower",
+      "parent": "Arm_Near_Upper",
+      "pivot": [
+        450,
+        518
+      ],
+      "end": [
+        464,
+        612
+      ],
+      "order": 21,
+      "sourceBounds": [
+        396,
+        492,
+        489,
+        617
+      ]
+    },
+    {
+      "name": "Hand_Near",
+      "parent": "Arm_Near_Lower",
+      "pivot": [
+        464,
+        612
+      ],
+      "end": [
+        468,
+        646
+      ],
+      "order": 22,
+      "sourceBounds": [
+        442,
+        598,
+        489,
+        659
+      ]
+    },
+    {
+      "name": "Leg_Far_Upper",
+      "parent": "Pelvis",
+      "pivot": [
+        532,
+        610
+      ],
+      "end": [
+        536,
+        790
+      ],
+      "order": 5,
+      "sourceBounds": [
+        500,
+        582,
+        565,
+        825
+      ]
+    },
+    {
+      "name": "Leg_Far_Lower",
+      "parent": "Leg_Far_Upper",
+      "pivot": [
+        536,
+        790
+      ],
+      "end": [
+        546,
+        914
+      ],
+      "order": 6,
+      "sourceBounds": [
+        506,
+        756,
+        596,
+        927
+      ]
+    },
+    {
+      "name": "Foot_Far",
+      "parent": "Leg_Far_Lower",
+      "pivot": [
+        546,
+        914
+      ],
+      "end": [
+        614,
+        944
+      ],
+      "order": 7,
+      "sourceBounds": [
+        509,
+        896,
+        630,
+        963
+      ]
+    },
+    {
+      "name": "Leg_Near_Upper",
+      "parent": "Pelvis",
+      "pivot": [
+        478,
+        610
+      ],
+      "end": [
+        448,
+        796
+      ],
+      "order": 9,
+      "sourceBounds": [
+        412,
+        586,
+        506,
+        831
+      ]
+    },
+    {
+      "name": "Leg_Near_Lower",
+      "parent": "Leg_Near_Upper",
+      "pivot": [
+        448,
+        796
+      ],
+      "end": [
+        436,
+        918
+      ],
+      "order": 10,
+      "sourceBounds": [
+        396,
+        762,
+        473,
+        931
+      ]
+    },
+    {
+      "name": "Foot_Near",
+      "parent": "Leg_Near_Lower",
+      "pivot": [
+        436,
+        918
+      ],
+      "end": [
+        484,
+        952
+      ],
+      "order": 11,
+      "sourceBounds": [
+        396,
+        900,
+        502,
+        971
+      ]
+    },
+    {
+      "name": "Coat_Inner",
+      "parent": "Pelvis",
+      "pivot": [
+        554,
+        572
+      ],
+      "end": [
+        584,
+        806
+      ],
+      "order": 8,
+      "sourceBounds": [
+        546,
+        562,
+        599,
+        829
+      ]
+    },
+    {
+      "name": "Coat_Back",
+      "parent": "Pelvis",
+      "pivot": [
+        470,
+        580
+      ],
+      "end": [
+        432,
+        700
+      ],
+      "order": 0,
+      "sourceBounds": [
+        385,
+        560,
+        488,
+        741
+      ]
+    },
+    {
+      "name": "Coat_Back_Tip",
+      "parent": "Coat_Back",
+      "pivot": [
+        432,
+        700
+      ],
+      "end": [
+        394,
+        786
+      ],
+      "order": 1,
+      "sourceBounds": [
+        352,
+        660,
+        457,
+        807
+      ]
+    },
+    {
+      "name": "Coat_Front",
+      "parent": "Pelvis",
+      "pivot": [
+        504,
+        580
+      ],
+      "end": [
+        476,
+        706
+      ],
+      "order": 14,
+      "sourceBounds": [
+        427,
+        558,
+        534,
+        747
+      ]
+    },
+    {
+      "name": "Coat_Front_Tip",
+      "parent": "Coat_Front",
+      "pivot": [
+        476,
+        706
+      ],
+      "end": [
+        464,
+        816
+      ],
+      "order": 15,
+      "sourceBounds": [
+        402,
+        666,
+        519,
+        839
+      ]
+    },
+    {
+      "name": "Coat_Body",
+      "parent": "Torso",
+      "pivot": [
+        502,
+        558
+      ],
+      "end": [
+        490,
+        380
+      ],
+      "order": 16,
+      "sourceBounds": [
+        416,
+        359,
+        567,
+        601
+      ]
+    },
+    {
+      "name": "Decoration_Brooch",
+      "parent": "Coat_Body",
+      "pivot": [
+        520,
+        424
+      ],
+      "end": [
+        524,
+        436
+      ],
+      "order": 18,
+      "sourceBounds": [
+        508,
+        408,
+        537,
+        445
+      ]
+    },
+    {
+      "name": "Decoration_Tassels",
+      "parent": "Coat_Body",
+      "pivot": [
+        526,
+        440
+      ],
+      "end": [
+        526,
+        484
+      ],
+      "order": 19,
+      "sourceBounds": [
+        512,
+        434,
+        567,
+        493
+      ]
+    },
+    {
+      "name": "Head",
+      "parent": "Torso",
+      "pivot": [
+        500,
+        366
+      ],
+      "end": [
+        504,
+        290
+      ],
+      "order": 17,
+      "sourceBounds": [
+        433,
+        232,
+        568,
+        375
+      ]
+    }
+  ]
+}

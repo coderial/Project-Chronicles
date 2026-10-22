@@ -12,6 +12,12 @@ namespace Project_Chronicles.Monster
 
         void ResetAnimation()
         {
+            // Discard unconsumed requests when another state takes animation ownership.
+            _anim.ResetTrigger("idle");
+            _anim.ResetTrigger("attack");
+            _anim.ResetTrigger("tripOver");
+            _anim.ResetTrigger("hurt");
+            _anim.ResetTrigger("die");
             _anim.SetBool("isLookUp", false);
             _anim.SetBool("isRun", false);
             _anim.SetBool("isJump", false);
